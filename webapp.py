@@ -25,7 +25,7 @@ st.header("Río Salado - Sistema de Alerta Hidrológico - Pronósticos")
 
 with st.sidebar:
     st.header("Cotas Estaciones")
-    ceroRP39   = st.number_input('Cero RP39',    value = 36.97) # Paso Las Piedras
+    ceroRP39   = st.number_input('Cero RP39',    value = 36.97) # Paso Las Piedras.
     ceroRP02   = st.number_input('Cero RP02',    value = 22.96) # San Justo
     ceroRP62   = st.number_input('Cero RP62',    value = 22.96) # Emilia
     ceroRP04   = st.number_input('Cero RP04',    value = 13.28) # Manucho
