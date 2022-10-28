@@ -1,0 +1,16 @@
+id;Rio;Ruta;Nombre;Descripción;Codigo2;lng;lat
+1;Río Salado;RP 39;Paso Las Piedras;Nueva;RP39;-60,655359094020500;-30,333389064576500
+2;Río Salado;RP 2;San Justo;Nueva, va a tener continuidad;RP02;-60,622525026311800;-30,746482928031800
+3;Río Salado;RP 61;San Justo;No se va a seguir midiendo;RP61;-60,717582515850900;-30,765451221792200
+4;Río Salado;RP 62;Emilia;Nueva, clave para el pronóstico;RP62;-60,841167438325700;-31,042196666920600
+5;Río Salado;RP 4;Manucho;Vieja y mala;RP04;-60,887960279779400;-31,254624454663500
+6;Río Salado;RP 70;Recreo;Telemétrica;RP70;-60,781643573290500;-31,490992075358900
+7;Río Salado;RN11;Santo Tomé;Mide el Ministerio;RN11;-60,751924428361100;-31,667625797598500
+8;Aº Golondrinas;RP 40;Fortín Olmos;Ver si vale la pena agregarla;RP40;-60,497532926932100;-29,065561018809600
+9;Aº Golondrinas;RN 98;El Bonete;Salida de los Bajos Submeridionales;RN98;-60,546532554429800;-29,388029938645200
+10;Río Calchaquí;RP 38;Calchaquí;Es de otra cuenca;RP38;-60,589807344899200;-29,871327102359300
+11;Aº Las Conchas;RP 93-S;Aguará Grande;Buenos datos, poca influencia en ruta 70;RP93;-60,989874202516500;-30,102686806202400
+12;Aº San Antonio;RP 262-s;Petronila;Buenos datos, poca influencia en ruta 70;RP262;-60,688805275463600;-30,670182783405000
+13;Aº Cululú;RP 50-s;Cululú;Buena;RP50S;-60,944230607582200;-31,195491425519500
+14;Aº Las Prusianas;RP 68;Grutly;;RP68;-61,066659306827600;-31,279964177041100
+15;Riacho Santa Fe;Puerto;Puerto;Puerto de Santa Fe;PTOSFE;-60,703835825427300;-31,657046711746400
