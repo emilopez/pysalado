@@ -1,4 +1,4 @@
-import funprono as fp
+import funprono
 
 import streamlit as st
 import plotly.graph_objects as go
@@ -35,7 +35,7 @@ with st.sidebar:
     ceroRP262  = st.number_input('Cero RP262',   value = 33.15) # Afluente Arroyo San Antonio / Petronilla
     ceroRP50S  = st.number_input('Cero RP50S',   value = 28.05) # Arroyo Cululu / Cululu
 
-c1, c2, c3, c4 = st.columns([2,0.5,2,2])
+c1, c2, c3, c4 = st.columns([1.7,0.3,2.1,2.1])
 
 uploaded_file = c1.file_uploader("Cargar archivo CSV [datos telemétricos]", type=["csv"])
 desde_n_dias = c2.selectbox("Días previos", (7, 50, 100))
@@ -67,27 +67,29 @@ if uploaded_file is not None:
     # 3 días de pronóstico para RP70
     tres = 3
     x_prono_RP70 = [last_date + datetime.timedelta(days=dia) for dia in range(1,tres+1)]
-    yRP70_prono = np.array(fp.get_prono_R70(data_altura_rios))
+    yRP70_prono = np.array(funprono.get_prono_R70(data_altura_rios))
     
     # 2 dias de pronostico para RP62
     dos = 2
     x_prono_RP62 = [last_date + datetime.timedelta(days=dia) for dia in range(1,dos+1)]
-    yRP62_prono = np.array(fp.get_prono_R62(data_altura_rios))
+    yRP62_prono = np.array(funprono.get_prono_R62(data_altura_rios))
     
     # trazas de pronosticos
     fig.add_trace(go.Scattergl(x=x_prono_RP70, y=ceroRP70 + yRP70_prono, mode="markers+lines", name="Prono R70"))
     fig.add_trace(go.Scattergl(x=x_prono_RP62, y=ceroRP62 + yRP62_prono, mode="markers+lines", name="Prono R62"))
     
-    # creo dataframes con datos de pronostico
-    values_prono_R70 = pd.DataFrame({"Fecha":x_prono_RP70, "Alturas":yRP70_prono})
-    values_prono_R70["RMSE"] = pd.Series(fp.RMSE_R70)
-    values_prono_R70["H-RMSE"] = ceroRP70 + values_prono_R70["Alturas"] - values_prono_R70["RMSE"]
-    values_prono_R70["H+RMSE"] = ceroRP70 + values_prono_R70["Alturas"] + values_prono_R70["RMSE"]
+    # DATAFRAMES con datos de pronostico
+    values_prono_R70 = pd.DataFrame({"Día":[1, 2, 3], "Fecha":x_prono_RP70, "Altura h (m)": yRP70_prono, "Altura H (m)": ceroRP70 + yRP70_prono})
+    values_prono_R70.set_index("Día")
+    values_prono_R70["RMSE"] = pd.Series(funprono.RMSE_R70)
+    values_prono_R70["H-RMSE"] = values_prono_R70["Altura H (m)"] - values_prono_R70["RMSE"]
+    values_prono_R70["H+RMSE"] = values_prono_R70["Altura H (m)"] + values_prono_R70["RMSE"]
 
-    values_prono_R62 = pd.DataFrame({"Fecha":x_prono_RP62, "Alturas":yRP62_prono})
-    values_prono_R62["RMSE"] = pd.Series(fp.RMSE_R62)
-    values_prono_R62["H-RMSE"] = ceroRP62 + values_prono_R62["Alturas"] - values_prono_R62["RMSE"]
-    values_prono_R62["H+RMSE"] = ceroRP62 + values_prono_R62["Alturas"] + values_prono_R62["RMSE"]
+    values_prono_R62 = pd.DataFrame({"Día":[1, 2],"Fecha":x_prono_RP62, "Altura h (m)": yRP62_prono,"Altura H (m)": ceroRP262 + yRP62_prono})
+    values_prono_R62.set_index("Día")
+    values_prono_R62["RMSE"] = pd.Series(funprono.RMSE_R62)
+    values_prono_R62["H-RMSE"] = values_prono_R62["Altura H (m)"] - values_prono_R62["RMSE"]
+    values_prono_R62["H+RMSE"] = values_prono_R62["Altura H (m)"] + values_prono_R62["RMSE"]
 
     # Grafico bandas de error
     #  RP70
@@ -117,10 +119,21 @@ if uploaded_file is not None:
     # show
     values_prono_R70['Fecha'] = pd.to_datetime(values_prono_R70['Fecha']).dt.strftime('%d/%m/%Y')
     values_prono_R62['Fecha'] = pd.to_datetime(values_prono_R62['Fecha']).dt.strftime('%d/%m/%Y')
+    # CSS to inject contained in a string
+    hide_table_row_index = """
+                <style>
+                thead tr th:first-child {display:none}
+                tbody th {display:none}
+                </style>
+                """
+
+    # Inject CSS with Markdown
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+
     with c3.expander("Valores Pronosticados RP70"):
-        st.write(values_prono_R70)
+        st.table(values_prono_R70.style.format({"Altura h (m)": "{:.2f}","Altura H (m)": "{:.2f}", "H-RMSE":"{:.2f}", "H+RMSE":"{:.2f}"}))
     with c4.expander("Valores Pronosticados RP62"):
-        st.write(values_prono_R62)
+        st.table(values_prono_R62.style.format({"Altura h (m)": "{:.2f}","Altura H (m)": "{:.2f}", "H-RMSE":"{:.2f}", "H+RMSE":"{:.2f}"}))
 
     c1, c2 = st.columns([2, 1])
     c1.plotly_chart(fig, use_container_width=True)
@@ -134,7 +147,7 @@ if uploaded_file is not None:
     estaciones_sah_df = pd.read_csv("datos/meta_estaciones_sah.csv", sep=";", decimal = ',')
 
     # agrega al dataframe ùltimas lecturas telemétricas a las estaciones del modelo
-    estaciones_sah_df = fp.add_data_to_metadata(estaciones_sah_df, data_altura_rios)
+    estaciones_sah_df = funprono.add_data_to_metadata(estaciones_sah_df, data_altura_rios)
 
     # creo mapa plotly
     estaciones_sah_map = go.Scattermapbox(mode = "markers", lon = estaciones_sah_df["lng"], lat = estaciones_sah_df["lat"], marker = {'size': 10}, name = "",

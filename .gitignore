@@ -1,3 +1,6 @@
 .ipynb_checkpoints/
 .mapbox_token
 webapp-local.py
+docu_files
+docu.html
+docu.docx
