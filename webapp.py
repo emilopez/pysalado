@@ -54,8 +54,8 @@ if uploaded_file is not None:
 
     fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP39 + data_altura_rios.RP39, mode="markers+lines", name="RP 39"))
     fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP02 + data_altura_rios.RP02, mode="markers+lines", name="RP 02"))
-    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP62 + data_altura_rios.RP04, mode="markers+lines", name="RP 04"))
-    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP04 + data_altura_rios.RN11, mode="markers+lines", name="RN 11"))
+    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP04 + data_altura_rios.RP04, mode="markers+lines", name="RP 04"))
+    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRN11 + data_altura_rios.RN11, mode="markers+lines", name="RN 11"))
     fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroPTOSFE + data_altura_rios.PTOSFE, mode="markers+lines", name="Puerto SFe"))
     fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP262 + data_altura_rios.RP262, mode="markers+lines", name="RP 262"))
     fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP50S + data_altura_rios.RP50S, mode="markers+lines", name="RP 50S"))
@@ -85,7 +85,7 @@ if uploaded_file is not None:
     values_prono_R70["H-RMSE"] = values_prono_R70["Altura H (m)"] - values_prono_R70["RMSE"]
     values_prono_R70["H+RMSE"] = values_prono_R70["Altura H (m)"] + values_prono_R70["RMSE"]
 
-    values_prono_R62 = pd.DataFrame({"Día":[1, 2],"Fecha":x_prono_RP62, "Altura h (m)": yRP62_prono,"Altura H (m)": ceroRP262 + yRP62_prono})
+    values_prono_R62 = pd.DataFrame({"Día":[1, 2],"Fecha":x_prono_RP62, "Altura h (m)": yRP62_prono,"Altura H (m)": ceroRP62 + yRP62_prono})
     values_prono_R62.set_index("Día")
     values_prono_R62["RMSE"] = pd.Series(funprono.RMSE_R62)
     values_prono_R62["H-RMSE"] = values_prono_R62["Altura H (m)"] - values_prono_R62["RMSE"]
