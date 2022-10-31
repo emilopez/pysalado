@@ -131,9 +131,9 @@ if uploaded_file is not None:
     st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
     with c3.expander("Valores Pronosticados RP70"):
-        st.table(values_prono_R70.style.format({"Altura h [m]": "{:.2f}","Nivel H [m IGN]": "{:.2f}", "H-RMSE":"{:.2f}", "H+RMSE":"{:.2f}"}))
+        st.table(values_prono_R70.style.format({"Altura h [m]": "{:.2f}","Nivel H [m IGN]": "{:.2f}", "RMSE":"{:.2f}", "H-RMSE":"{:.2f}", "H+RMSE":"{:.2f}"}))
     with c4.expander("Valores Pronosticados RP62"):
-        st.table(values_prono_R62.style.format({"Altura h [m]": "{:.2f}","Nivel H [m IGN]": "{:.2f}", "H-RMSE":"{:.2f}", "H+RMSE":"{:.2f}"}))
+        st.table(values_prono_R62.style.format({"Altura h [m]": "{:.2f}","Nivel H [m IGN]": "{:.2f}", "RMSE":"{:.2f}", "H-RMSE":"{:.2f}", "H+RMSE":"{:.2f}"}))
 
     c1, c2 = st.columns([2, 1])
     c1.plotly_chart(fig, use_container_width=True)
