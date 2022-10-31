@@ -79,17 +79,17 @@ if uploaded_file is not None:
     fig.add_trace(go.Scattergl(x=x_prono_RP62, y=ceroRP62 + yRP62_prono, mode="markers+lines", name="Prono R62"))
     
     # DATAFRAMES con datos de pronostico
-    values_prono_R70 = pd.DataFrame({"Día":[1, 2, 3], "Fecha":x_prono_RP70, "Altura h (m)": yRP70_prono, "Altura H (m)": ceroRP70 + yRP70_prono})
+    values_prono_R70 = pd.DataFrame({"Día":[1, 2, 3], "Fecha":x_prono_RP70, "Altura h [m]": yRP70_prono, "Nivel H [m IGN]": ceroRP70 + yRP70_prono})
     values_prono_R70.set_index("Día")
     values_prono_R70["RMSE"] = pd.Series(funprono.RMSE_R70)
-    values_prono_R70["H-RMSE"] = values_prono_R70["Altura H (m)"] - values_prono_R70["RMSE"]
-    values_prono_R70["H+RMSE"] = values_prono_R70["Altura H (m)"] + values_prono_R70["RMSE"]
+    values_prono_R70["H-RMSE"] = values_prono_R70["Nivel H [m IGN]"] - values_prono_R70["RMSE"]
+    values_prono_R70["H+RMSE"] = values_prono_R70["Nivel H [m IGN]"] + values_prono_R70["RMSE"]
 
-    values_prono_R62 = pd.DataFrame({"Día":[1, 2],"Fecha":x_prono_RP62, "Altura h (m)": yRP62_prono,"Altura H (m)": ceroRP62 + yRP62_prono})
+    values_prono_R62 = pd.DataFrame({"Día":[1, 2],"Fecha":x_prono_RP62, "Altura h [m]": yRP62_prono,"Nivel H [m IGN]": ceroRP62 + yRP62_prono})
     values_prono_R62.set_index("Día")
     values_prono_R62["RMSE"] = pd.Series(funprono.RMSE_R62)
-    values_prono_R62["H-RMSE"] = values_prono_R62["Altura H (m)"] - values_prono_R62["RMSE"]
-    values_prono_R62["H+RMSE"] = values_prono_R62["Altura H (m)"] + values_prono_R62["RMSE"]
+    values_prono_R62["H-RMSE"] = values_prono_R62["Nivel H [m IGN]"] - values_prono_R62["RMSE"]
+    values_prono_R62["H+RMSE"] = values_prono_R62["Nivel H [m IGN]"] + values_prono_R62["RMSE"]
 
     # Grafico bandas de error
     #  RP70
@@ -111,7 +111,7 @@ if uploaded_file is not None:
         height =630,
         font  = dict(family = "Calibri", size = 20,),
         xaxis = dict(title = "Fecha", showline = True, showgrid = True, tickformat="%d/%m/%Y",tickfont = dict(family = 'Calibri')),
-        yaxis = dict(title = "Altura [mts]", showline = True, showgrid = True,tickfont = dict(family = 'Calibri')),
+        yaxis = dict(title = "Nivel [m IGN]", showline = True, showgrid = True,tickfont = dict(family = 'Calibri')),
         legend = dict(orientation="h",yanchor="bottom", y=1),
         margin ={'l':0,'t':50,'b':0,'r':0},
         hovermode="x"
@@ -131,9 +131,9 @@ if uploaded_file is not None:
     st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
     with c3.expander("Valores Pronosticados RP70"):
-        st.table(values_prono_R70.style.format({"Altura h (m)": "{:.2f}","Altura H (m)": "{:.2f}", "H-RMSE":"{:.2f}", "H+RMSE":"{:.2f}"}))
+        st.table(values_prono_R70.style.format({"Altura h [m]": "{:.2f}","Nivel [m IGN]": "{:.2f}", "H-RMSE":"{:.2f}", "H+RMSE":"{:.2f}"}))
     with c4.expander("Valores Pronosticados RP62"):
-        st.table(values_prono_R62.style.format({"Altura h (m)": "{:.2f}","Altura H (m)": "{:.2f}", "H-RMSE":"{:.2f}", "H+RMSE":"{:.2f}"}))
+        st.table(values_prono_R62.style.format({"Altura h [m]": "{:.2f}","Nivel [m IGN]": "{:.2f}", "H-RMSE":"{:.2f}", "H+RMSE":"{:.2f}"}))
 
     c1, c2 = st.columns([2, 1])
     c1.plotly_chart(fig, use_container_width=True)
@@ -156,7 +156,7 @@ if uploaded_file is not None:
                                                         "Río: " + estaciones_sah_df["Rio"] + "<br>" +
                                                         "Ruta: "+ estaciones_sah_df["Ruta"] +"<br>" +
                                                         "Descripción:" + estaciones_sah_df["Descripción"] + "<br><br>" + 
-                                                        "Último dato: " + estaciones_sah_df["ultimo_dato"] + "<br>" + 
+                                                        "Último dato (Altura h [m]): " + estaciones_sah_df["ultimo_dato"] + "<br>" + 
                                                         "Fecha: " + estaciones_sah_df["fecha_ultimo_dato"] 
                                         )
     layout = go.Layout(
