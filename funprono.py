@@ -65,6 +65,7 @@ coef_RP62_dia_1 = np.array([ 1.20928, # c1
                              0.14318, # c5
                              0.22558, # c6
                             -0.19703, # c7
+                            -0.12892, # c8
                             -0.21601  ])# b
 # 2 DIAS total
 # Coef: [c1, c2, c3, c4, c5, c6, c7, b]
@@ -138,10 +139,10 @@ def get_prono_R62(df, dias=2):
         """Predictores (8): RP62(t), RP62(t-1), RP02(t), RP02(t-1), RP02(t-2), RP262(t), RP262(t-1), b"""
         X_RP62 = np.array(df[-2:]["RP62" ][::-1].to_list()    + # [RP62(t), RP62(t-1)]
                           df[-3:]["RP02" ][::-1].to_list()    + # [RP02(t), RP02(t-1), RP02(t-2)]
-                          df[-2:]["RP262"][::-1].to_list()    + # [RP262(t), RP262(t-1)]
+                          df[-3:]["RP262"][::-1].to_list()    + # [RP262(t), RP262(t-1), RP262(t-2)]
                           [1.0]                                 # 1: para coef independiente b
                           )
-        return compute_regression(coef_RP62_dia_1, X_RP62)
+        return X_RP62, compute_regression(coef_RP62_dia_1, X_RP62)
     
     def dia_2(df):
         """Predictores (8): RP62(t), RP62(t-1), RP02(t), RP02(t-1), RP262(t), RP262(t-1), RP39(t), 1"""
