@@ -142,7 +142,7 @@ def get_prono_R62(df, dias=2):
                           df[-3:]["RP262"][::-1].to_list()    + # [RP262(t), RP262(t-1), RP262(t-2)]
                           [1.0]                                 # 1: para coef independiente b
                           )
-        return X_RP62, compute_regression(coef_RP62_dia_1, X_RP62)
+        return compute_regression(coef_RP62_dia_1, X_RP62)
     
     def dia_2(df):
         """Predictores (8): RP62(t), RP62(t-1), RP02(t), RP02(t-1), RP262(t), RP262(t-1), RP39(t), 1"""
