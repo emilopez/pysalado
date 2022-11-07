@@ -85,10 +85,10 @@ coef_RP62_dia_2 = np.array([ 0.97693, # c1
 def compute_regression(coef, X):
     """Compute regressions, if any NaN value in X return []"""
     hay_NaN = np.sum(np.isnan(X))
-    if not hay_NaN:
+    if not hay_NaN and (len(coef) == len(X)):
         prono = np.dot(coef, X)
     else:
-        prono = []
+        prono = np.nan
     return prono
 
 def get_prono_R70(df, dias=3):
@@ -175,6 +175,10 @@ def add_data_to_metadata(metadataframe, dataframe):
             idx = d.notna()
             ultimo_registro = dataframe.loc[idx,['Fecha', code]][-1:] 
             idx2 = metadataframe['Codigo2'] == code
-            metadataframe.loc[idx2,"fecha_ultimo_dato"] = str(ultimo_registro.iat[0,0])
-            metadataframe.loc[idx2,"ultimo_dato"] = str(ultimo_registro.iat[0,1])
+            if len(ultimo_registro)==0:
+                metadataframe.loc[idx2,"fecha_ultimo_dato"] = ""
+                metadataframe.loc[idx2,"ultimo_dato"] = ""
+            else:    
+                metadataframe.loc[idx2,"fecha_ultimo_dato"] = str(ultimo_registro.iat[0,0])
+                metadataframe.loc[idx2,"ultimo_dato"] = str(ultimo_registro.iat[0,1])
     return metadataframe
