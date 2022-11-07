@@ -49,16 +49,16 @@ if uploaded_file is not None:
     
     # trazas de alturas observadas telemetricamente
     fig = go.Figure()
-    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP70 + data_altura_rios.RP70, mode="markers+lines", name="Ruta 70"))
-    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP62 + data_altura_rios.RP62, mode="markers+lines", name="Ruta 62"))
+    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP70 + data_altura_rios.RP70, mode="markers+lines", name="Ruta 70",line=dict(color="dodgerblue")))
+    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP62 + data_altura_rios.RP62, mode="markers+lines", name="Ruta 62",line=dict(color="salmon")))
 
-    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP39 + data_altura_rios.RP39, mode="markers+lines", name="RP 39"))
-    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP02 + data_altura_rios.RP02, mode="markers+lines", name="RP 02"))
-    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP04 + data_altura_rios.RP04, mode="markers+lines", name="RP 04"))
-    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRN11 + data_altura_rios.RN11, mode="markers+lines", name="RN 11"))
-    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroPTOSFE + data_altura_rios.PTOSFE, mode="markers+lines", name="Puerto SFe"))
-    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP262 + data_altura_rios.RP262, mode="markers+lines", name="RP 262"))
-    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP50S + data_altura_rios.RP50S, mode="markers+lines", name="RP 50S"))
+    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP39 + data_altura_rios.RP39, mode="markers+lines", name="RP 39",line=dict(color="lightgoldenrodyellow")))
+    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP02 + data_altura_rios.RP02, mode="markers+lines", name="RP 02",line=dict(color="lightgray")))
+    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP04 + data_altura_rios.RP04, mode="markers+lines", name="RP 04",line=dict(color="lightgrey")))
+    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRN11 + data_altura_rios.RN11, mode="markers+lines", name="RN 11",line=dict(color="lightgreen")))
+    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroPTOSFE + data_altura_rios.PTOSFE, mode="markers+lines", name="Puerto SFe",line=dict(color="lightseagreen")))
+    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP262 + data_altura_rios.RP262, mode="markers+lines", name="RP 262",line=dict(color="lightslategrey")))
+    fig.add_trace(go.Scattergl(x=data_altura_rios.Fecha, y = ceroRP50S + data_altura_rios.RP50S, mode="markers+lines", name="RP 50S",line=dict(color="lightyellow")))
     
     # Pronosticos
     # último día de mediciones
@@ -75,8 +75,8 @@ if uploaded_file is not None:
     yRP62_prono = np.array(funprono.get_prono_R62(data_altura_rios))
     
     # trazas de pronosticos
-    fig.add_trace(go.Scattergl(x=x_prono_RP70, y=ceroRP70 + yRP70_prono, mode="markers+lines", name="Prono R70"))
-    fig.add_trace(go.Scattergl(x=x_prono_RP62, y=ceroRP62 + yRP62_prono, mode="markers+lines", name="Prono R62"))
+    fig.add_trace(go.Scattergl(x=x_prono_RP70, y=ceroRP70 + yRP70_prono, mode="markers+lines", name="Prono R70",line=dict(color="dodgerblue", width=3, dash='dot')))
+    fig.add_trace(go.Scattergl(x=x_prono_RP62, y=ceroRP62 + yRP62_prono, mode="markers+lines", name="Prono R62",line=dict(color="salmon", width=3, dash='dot')))
     
     # DATAFRAMES con datos de pronostico
     values_prono_R70 = pd.DataFrame({"Día":[1, 2, 3], "Fecha":x_prono_RP70, "Altura h [m]": yRP70_prono, "Nivel H [m IGN]": ceroRP70 + yRP70_prono})
@@ -97,14 +97,14 @@ if uploaded_file is not None:
         mode='lines', marker=dict(color="#444"), line=dict(width=0), showlegend=False),
     )
     fig.add_trace(go.Scatter(name='Banda inferior', x=values_prono_R70['Fecha'], y=values_prono_R70["H-RMSE"],
-        marker=dict(color="#444"), line=dict(width=0), mode='lines', fillcolor='rgba(0, 88, 20, 0.2)', fill='tonexty', showlegend=False)
+        marker=dict(color="#444"), line=dict(width=0), mode='lines', fillcolor='rgba(0, 88, 20, 0.4)', fill='tonexty', showlegend=False)
     )
     #  RP62
     fig.add_trace(go.Scatter(name='Banda superior', x = values_prono_R62['Fecha'], y = values_prono_R62["H+RMSE"],
         mode='lines', marker=dict(color="#444"), line=dict(width=0), showlegend=False),
     )
     fig.add_trace(go.Scatter(name='Banda inferior', x=values_prono_R62['Fecha'], y=values_prono_R62["H-RMSE"],
-        marker=dict(color="#444"), line=dict(width=0), mode='lines', fillcolor='rgba(55, 0, 20, 0.2)', fill='tonexty', showlegend=False)
+        marker=dict(color="#444"), line=dict(width=0), mode='lines', fillcolor='rgba(55, 0, 20, 0.4)', fill='tonexty', showlegend=False)
     )
 
     fig.update_layout(
@@ -113,7 +113,7 @@ if uploaded_file is not None:
         xaxis = dict(title = "Fecha", showline = True, showgrid = True, tickformat="%d/%m/%Y",tickfont = dict(family = 'Calibri')),
         yaxis = dict(title = "Nivel [m IGN]", showline = True, showgrid = True,tickfont = dict(family = 'Calibri')),
         legend = dict(orientation="h",yanchor="bottom", y=1),
-        margin ={'l':0,'t':50,'b':0,'r':0},
+        margin ={'l':0,'t':100,'b':0,'r':0},
         hovermode="x"
     )
     # show
