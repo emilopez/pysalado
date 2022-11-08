@@ -175,10 +175,7 @@ def add_data_to_metadata(metadataframe, dataframe):
             idx = d.notna()
             ultimo_registro = dataframe.loc[idx,['Fecha', code]][-1:] 
             idx2 = metadataframe['Codigo2'] == code
-            if len(ultimo_registro)==0:
-                metadataframe.loc[idx2,"fecha_ultimo_dato"] = ""
-                metadataframe.loc[idx2,"ultimo_dato"] = ""
-            else:    
+            if len(ultimo_registro)>0:    
                 metadataframe.loc[idx2,"fecha_ultimo_dato"] = str(ultimo_registro.iat[0,0])
                 metadataframe.loc[idx2,"ultimo_dato"] = str(ultimo_registro.iat[0,1])
     return metadataframe
