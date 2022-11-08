@@ -7,9 +7,6 @@ import pandas as pd
 import datetime
 
 
-#mapbox_access_token = open(".mapbox_token").read()
-mapbox_access_token = st.secrets["mapbox_token"]
-
 st.set_page_config(
      page_title="Pronóstico Río Salado",
      page_icon="❤️",
@@ -20,6 +17,12 @@ st.markdown(""" <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 </style> """, unsafe_allow_html=True)
+
+try:
+    mapbox_access_token = st.secrets["mapbox_token"]
+except:
+    mapbox_access_token = open(".mapbox_token").read()
+    
 
 st.header("Río Salado - Sistema de Alerta Hidrológico - Pronósticos")
 
