@@ -1,5 +1,6 @@
 .ipynb_checkpoints/
 .mapbox_token
+to_build/
 webapp-local.py
 docu_files
 docu.html
