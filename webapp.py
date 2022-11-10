@@ -7,9 +7,10 @@ import pandas as pd
 import datetime
 
 
+#today_icon = random.choice(["🧉", "📉", "💧","🦩","🦟","🌎", "🇦🇷","🌅","🌉"]) #https://emojipedia.org/
 st.set_page_config(
      page_title="Pronóstico Río Salado",
-     page_icon="❤️",
+     page_icon="🇦🇷",
      layout="wide",
      initial_sidebar_state="collapsed",
 )
@@ -186,6 +187,7 @@ with principal:
 with acerca_de:
     st.write("Programa:", "PySalado")
     st.write("Versión:",1.0)
+    st.write("Dependencias:", "Python 3.8.5, Pandas, Numpy, Plotly")
     st.write("Fecha:", "08/11/2022")
     st.write("Autor:", "Mg. Ing. Emiliano P. López")
     st.write("Email:", "emiliano.lopez@gmail.com")
