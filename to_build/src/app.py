@@ -166,7 +166,12 @@ def get_prono_R62(df, dias=2):
     if dias == 1:
         y_prono_R62 = [dia_1(df)]
     elif dias >= 2:
-        y_prono_R62 = [dia_1(df), dia_2(df)]
+        # contrario a la ecuación, al encontrar nan en dia 1, no calculo día 2 porque es incongruente
+        val_dia_1 = dia_1(df)
+        if np.isnan(val_dia_1):
+            y_prono_R62 = [np.nan, np.nan]
+        else:
+            y_prono_R62 = [val_dia_1, dia_2(df)]
     return y_prono_R62
 
 def add_data_to_metadata(metadataframe, dataframe):
@@ -241,8 +246,14 @@ desde_n_dias = c2.selectbox("Días previos", (7, 50, 100))
 if uploaded_file is not None:
     
     # lectura archivo CSV
-    data_altura_rios = pd.read_csv(uploaded_file, sep=";", parse_dates=["Fecha"], decimal = ',', comment="#", dayfirst=True)
-    data_altura_rios = data_altura_rios[-desde_n_dias:]
+    try:
+        data_altura_rios = pd.read_csv(uploaded_file, sep=";", parse_dates=["Fecha"], decimal = ',', comment="#", dayfirst=True)
+        data_altura_rios = data_altura_rios[-desde_n_dias:]
+    except:
+        st.error('Formato de archivo incorrecto! Lea la documentación')
+        nan_list = [np.nan]
+        empty_dict = {"Fecha":nan_list, "RP70":nan_list, "RP62":nan_list, "RP39":nan_list, "RP02":nan_list, "RP04":nan_list, "RN11":nan_list, "PTOSFE":nan_list, "RP262":nan_list, "RP50S":nan_list}
+        data_altura_rios = pd.DataFrame(empty_dict)
     
     # trazas de alturas observadas telemetricamente
     fig = go.Figure()
