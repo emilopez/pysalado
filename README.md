@@ -107,7 +107,9 @@ files = src/datos/
   - cuando se lee el archivo `meta_estaciones_sah.csv` hacerlo así: `os.path.join(os.path.dirname(__file__), "datos", "meta_estaciones_sah.csv")`
 
 5. Finalmente ejecuto: `pynsist installer.cfg`
+6. Generará un ejecutable `.exe` que es el único necesario para realizar la instalación. 
 
 
 ## Rutas de instalación
 - Paquetes python: `C:\Users\emili\AppData\Local\pynsist\pypi\`
+- Instalación de `PySalado.exe` en ruta: `C:\Users\emili\AppData\Local\Programs\PySalado\Python\`
