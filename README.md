@@ -72,7 +72,7 @@ pypi_wheels = altair==4.1.0
     setuptools==57.0.0
     six==1.14.0
     smmap==4.0.0
-    streamlit==1.0.0
+    streamlit==1.11.0
     terminado==0.12.1
     testpath==0.5.0
     toml==0.10.2
@@ -105,3 +105,9 @@ files = src/datos/
 
 4. Detalles a tener en cuenta en `app.py`
   - cuando se lee el archivo `meta_estaciones_sah.csv` hacerlo así: `os.path.join(os.path.dirname(__file__), "datos", "meta_estaciones_sah.csv")`
+
+5. Finalmente ejecuto: `pynsist installer.cfg`
+
+
+## Rutas de instalación
+- Paquetes python: `C:\Users\emili\AppData\Local\pynsist\pypi\`
