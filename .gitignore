@@ -4,6 +4,7 @@ webapp-local.py
 docu_files
 docu.html
 docu.docx
+*.pyc
 __pycache__/
 datos/Pronostico_Alturas maximas.docx
 datos/Alturas_Calculadas_2004-2020_conGraficos.xlsx
