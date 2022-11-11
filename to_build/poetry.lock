@@ -954,7 +954,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "streamlit"
-version = "1.11.0"
+version = "1.0.0"
 description = "The fastest way to build data apps in Python"
 category = "main"
 optional = false
